@@ -2,6 +2,8 @@
 
 A composite action that writes the diff of `bun.lockb` file into a comment of pull request.
 
+![Demo comment](demo.jpg)
+
 ## Requirements
 
 - Running on `pull_request` event,
