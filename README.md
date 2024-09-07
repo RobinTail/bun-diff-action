@@ -1,6 +1,6 @@
 # bun-diff-action
 
-A composite action that writes the diff of bun.lock file into a comment of pull request.
+A composite action that writes the diff of bun.lockb file into a comment of pull request.
 
 ## Requirements
 
