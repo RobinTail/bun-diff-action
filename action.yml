@@ -18,6 +18,7 @@ runs:
     - name: Collect the diff
       id: collect
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         echo 'comment<<EOF' >> $GITHUB_OUTPUT
         echo "<!-- bun-diff-action -->" >> $GITHUB_OUTPUT
