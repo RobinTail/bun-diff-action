@@ -32,3 +32,10 @@ jobs:
         # if: github.event_name == 'pull_request'
         uses: RobinTail/bun-diff-action@v... # set the version
 ```
+
+## Alternatives
+
+- https://github.com/koki-develop/bun-diff-action
+  - Written in Typescript,
+  - Runs on Node 20,
+  - Can install `bun` itself.
