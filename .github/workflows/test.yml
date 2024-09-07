@@ -3,7 +3,7 @@ on: pull_request
 permissions:
   pull-requests: write # for comments in PRs
 jobs:
-  sample:
+  local:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
