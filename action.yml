@@ -1,4 +1,4 @@
-name: bun-diff-action
+name: bun-diff
 author: Anna Bocharova
 description: A composite action that writes the diff of bun.lock file into a comment of pull request
 branding:
