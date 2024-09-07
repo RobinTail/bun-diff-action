@@ -2,6 +2,6 @@
   "name": "test-for-bun-diff-action",
   "private": "true",
   "dependencies": {
-    "@types/bun": "1.0.5"
+    "@types/bun": "1.0.6"
   }
 }
