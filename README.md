@@ -5,6 +5,7 @@ A composite action that writes the diff of bun.lock file into a comment of pull 
 ## Requirements
 
 - Running on `pull_request` event,
+- Permission to `write` comments to the pull request;
 - Check out with `fetch-depth: 0`,
 - Install `bun`.
 
