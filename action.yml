@@ -17,7 +17,7 @@ runs:
         echo "# bun.lockb diff" >> diff.txt
         echo ${{ github.event.pull_request.head.sha }} >> diff.txt
         echo '```diff' >> diff.txt
-        git diff ${{ github.event.pull_request.base.label }}..HEAD bun.lockb >> diff.txt
+        git diff ${{ github.base_ref }}..HEAD bun.lockb >> diff.txt
         echo '```' >> diff.txt
     - name: Find Comment
       uses: peter-evans/find-comment@v3
