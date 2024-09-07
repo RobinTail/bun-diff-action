@@ -12,19 +12,11 @@ A composite action that writes the diff of bun.lock file into a comment of pull 
 ## Usage
 
 ```yaml
-name: CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: pull_request
 permissions:
   pull-requests: write # for comments in PRs
-
 jobs:
-  unitTest:
+  sample:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,6 +28,7 @@ jobs:
         with:
           bun-version: latest
       - name: Show the bun lock diff
-        if: github.event_name == 'pull_request' # only for this event
+        # in case the workflow has multiple triggers:
+        # if: github.event_name == 'pull_request'
         uses: RobinTail/bun-diff-action@v... # set the version
 ```
