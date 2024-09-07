@@ -1,0 +1,48 @@
+name: bun-diff-action
+author: Anna Bocharova
+description: A composite action that writes the diff of bun.lock file into a comment of pull request
+branding:
+  icon: list
+  color: green
+runs:
+  using: composite
+  steps:
+    - name: Set up diff
+      shell: bash
+      run: bunx bunpare
+    - name: Collect the diff
+      shell: bash
+      run: |
+        echo "<!-- bun-diff-action -->" >> diff.txt
+        echo "# bun.lockb diff" >> diff.txt
+        echo ${{ github.event.pull_request.head.sha }} >> diff.txt
+        echo '```diff' >> diff.txt
+        git diff ${{ github.event.pull_request.base.label }}..HEAD bun.lockb >> diff.txt
+        echo '```' >> diff.txt
+    - name: Find Comment
+      uses: peter-evans/find-comment@v3
+      id: fc
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: bun-diff-action
+    - name: Create comment
+      if: steps.fc.outputs.comment-id == ''
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body-file: diff.txt
+        reactions: rocket
+    - name: Update comment
+      if: steps.fc.outputs.comment-id != ''
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        edit-mode: replace
+        body-file: diff.txt
+        reactions: hooray
+    - name: Cleanup
+      shell: bash
+      run: rm diff.txt
+
+
