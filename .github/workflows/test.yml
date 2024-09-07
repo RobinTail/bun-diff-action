@@ -15,5 +15,6 @@ jobs:
         with:
           bun-version: latest
       - name: Show the bun lock diff
-        working-directory: test
         uses: ./..
+        with:
+          working-directory: test

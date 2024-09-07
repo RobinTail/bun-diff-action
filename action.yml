@@ -4,6 +4,11 @@ description: A composite action that writes the diff of bun.lock file into a com
 branding:
   icon: list
   color: green
+inputs:
+  working-directory:
+    description: Directory to find bun.lockb file
+    required: false
+    default: .
 runs:
   using: composite
   steps:
@@ -12,6 +17,7 @@ runs:
       run: bunx bunpare
     - name: Collect the diff
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         echo "<!-- bun-diff-action -->" >> diff.txt
         echo "# bun.lockb diff" >> diff.txt
@@ -31,7 +37,7 @@ runs:
       uses: peter-evans/create-or-update-comment@v4
       with:
         issue-number: ${{ github.event.pull_request.number }}
-        body-file: diff.txt
+        body-path: ${{ inputs.working-directory }}/diff.txt
         reactions: rocket
     - name: Update comment
       if: steps.fc.outputs.comment-id != ''
@@ -39,10 +45,11 @@ runs:
       with:
         comment-id: ${{ steps.fc.outputs.comment-id }}
         edit-mode: replace
-        body-file: diff.txt
+        body-path: ${{ inputs.working-directory }}/diff.txt
         reactions: hooray
     - name: Cleanup
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: rm diff.txt
 
 
