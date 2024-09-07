@@ -22,6 +22,7 @@ runs:
       run: |
         echo 'comment<<EOF' >> $GITHUB_OUTPUT
         echo "<!-- bun-diff-action -->" >> $GITHUB_OUTPUT
+        echo "# bun.lockb diff" >> $GITHUB_OUTPUT
         echo ${{ github.event.pull_request.head.sha }} >> $GITHUB_OUTPUT
         echo '```diff' >> $GITHUB_OUTPUT
         git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} bun.lockb >> $GITHUB_OUTPUT
