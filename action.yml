@@ -26,12 +26,14 @@ runs:
     - name: Make the text
       id: text
       shell: bash
+      env:
+        THE_DIFF: ${{ steps.collect.outputs.diff }}
       run: |
         echo 'comment<<EOF' >> $GITHUB_OUTPUT
         echo "<!-- bun-diff-action -->" >> $GITHUB_OUTPUT
         echo ${{ github.event.pull_request.head.sha }} >> $GITHUB_OUTPUT
         echo '```diff' >> $GITHUB_OUTPUT
-        echo '${{ steps.collect.outputs.diff }}' >> $GITHUB_OUTPUT
+        echo $THE_DIFF >> $GITHUB_OUTPUT
         echo '```' >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Find Comment
