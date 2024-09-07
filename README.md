@@ -33,6 +33,16 @@ jobs:
         uses: RobinTail/bun-diff-action@v... # set the version
 ```
 
+### Options
+
+```yaml
+with:
+  working-directory:
+    description: Directory to find bun.lockb file
+    required: false
+    default: .
+```
+
 ## Alternatives
 
 - https://github.com/koki-develop/bun-diff-action
