@@ -9,6 +9,13 @@ inputs:
     description: Directory to find bun.lockb file
     required: false
     default: .
+outputs:
+  diff:
+    description: The output of the `git diff` command
+    value: $THE_DIFF
+  comment-id:
+    description: The maintained comment containing the
+    value: ${{ steps.fc.outputs.comment-id }}
 runs:
   using: composite
   steps:
