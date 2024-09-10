@@ -15,6 +15,11 @@ jobs:
         with:
           bun-version: latest
       - name: Show the bun lock diff
+        id: show
         uses: ./
         with:
           working-directory: test
+      - name: Control outputs
+        run: |
+          echo {{ steps.show.outputs.diff }}
+          echo {{ steps.show.outputs.comment-id }}
