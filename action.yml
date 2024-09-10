@@ -19,11 +19,15 @@ runs:
       id: collect
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+      run: echo ${{ github.event.pull_request.head.sha }} >> $THE_DIFF
+    - name: Compose the comment
+      id: compose
+      shell: bash
       run: |
         echo 'comment<<EOF' >> $GITHUB_OUTPUT
         echo "<!-- bun-diff-action -->" >> $GITHUB_OUTPUT
         echo "# bun.lockb diff" >> $GITHUB_OUTPUT
-        echo ${{ github.event.pull_request.head.sha }} >> $GITHUB_OUTPUT
+        echo "$THE_DIFF" >> $GITHUB_OUTPUT
         echo '```diff' >> $GITHUB_OUTPUT
         git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} bun.lockb >> $GITHUB_OUTPUT
         echo '```' >> $GITHUB_OUTPUT
@@ -42,4 +46,4 @@ runs:
         comment-id: ${{ steps.fc.outputs.comment-id }}
         edit-mode: ${{ steps.fc.outputs.comment-id == '' && 'append' || 'replace' }}
         reactions: ${{ steps.fc.outputs.comment-id == '' && 'rocket' || 'hooray' }}
-        body: ${{ steps.collect.outputs.comment }}
+        body: ${{ steps.compose.outputs.comment }}
