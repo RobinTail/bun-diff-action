@@ -1,4 +1,4 @@
-# bun-diff-action
+# RobinTail/bun-diff-action
 
 A composite action that writes the diff of `bun.lockb` file into a comment of pull request.
 The `diff` syntax is highlighted and the action keeps that comment up to date.
