@@ -3,6 +3,9 @@
 A composite action that writes the diff of `bun.lockb` file into a comment of pull request.
 The `diff` syntax is highlighted and the action keeps that comment up to date.
 
+⚠️ Bun has swicthed to a text-based lockfile so that this action is no longer required:
+[read more about it and find out how to upgrade](https://bun.sh/blog/bun-lock-text-lockfile).
+
 ![Demo comment](demo.jpg)
 
 ## Requirements
